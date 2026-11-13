@@ -1,16 +1,31 @@
+#pragma once
+
 #include "config.h"
 
+/* ============================================================
+ * Colori del pavimento riconosciuti dall'APDS9960.
+ * ============================================================ */
 typedef enum {
-    FLOOR_UNKOWN,
-    FLOOR_WHITE,
-    FLOOR_SILVER,
-    FLOOR_BLACK,
-    FLOOR_BLUE,
-    FLOOR_RED
+    FLOOR_UNKOWN,    /* non classificato */
+    FLOOR_WHITE,     /* pavimento normale */
+    FLOOR_SILVER,    /* checkpoint — salvare posizione */
+    FLOOR_BLACK,     /* buco / assenza pavimento → LoP immediato */
+    FLOOR_BLUE,      /* pozzanghera → stop 5 s */
+    FLOOR_RED        /* zona pericolosa → rallentare */
 } floor_color_t;
 
-int color_init();
+/**
+ * Inizializza il sensore APDS9960.
+ * @return 1 se OK, 0 se errore.
+ */
+int color_init(void);
 
-void color_read_rgb(u16* r, u16* g, u16* b, u16* c);
+/**
+ * Legge i canali RGBC raw.
+ */
+void color_read_rgb(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c);
 
-floor_color_t color_read_floor_color();
+/**
+ * Classifica il colore del pavimento sotto il robot.
+ */
+floor_color_t color_read_floor_color(void);

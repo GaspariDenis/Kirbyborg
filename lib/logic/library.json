@@ -1,0 +1,8 @@
+{
+  "name": "logic",
+  "version": "1.0.0",
+  "description": "Kirbyborg robot FSM and Pi5 communication protocol",
+  "dependencies": [
+    { "name": "drivers", "version": "1.0.0" }
+  ]
+}
